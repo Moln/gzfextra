@@ -1,0 +1,20 @@
+<?='<?php'?>
+
+namespace <?=$module?>\Model;
+
+use Gzfextra\Db\TableGateway\AbstractTableGateway;
+
+/**
+ * Class <?=$name?>Table
+ *
+ * @package <?=$module?>\Model
+ * @author  
+ * @version $Id$
+ *
+<?php if ($e) { ?>
+ * @method <?=$name?> create(array $row = null)
+<?php } ?>
+ */
+class <?=$name?>Table extends AbstractTableGateway
+{
+}

@@ -1,0 +1,17 @@
+{
+    "name": "giant/gzfextra",
+    "authors": [
+        {
+            "name": "Moln",
+            "email": "xiemaomao520@163.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Gzfextra\\": "src/Gzfextra"
+        }
+    },
+    "require": {
+        "php": ">=5.4"
+    }
+}

@@ -1,0 +1,21 @@
+<?='<?php'?>
+
+namespace <?=$module?>\Model;
+
+use Gzfextra\Db\AbstractTable;
+
+/**
+ * Class <?=$name?>Table
+ *
+ * @package <?=$module?>\Model
+ * @author  Xiemaomao
+ * @version $Id$
+ *
+ * @method <?=$name?> create();
+ */
+class <?=$name?>Table extends AbstractTable
+{
+    protected $primary = '<?=$primary?>';
+    protected $table = '<?=$table?>';
+    protected $rowGateway = true;
+}

@@ -1,0 +1,51 @@
+<?='<?php'?>
+
+namespace <?=$module?>\Model;
+
+use Zend\Db\RowGateway\RowGateway;
+
+/**
+ * Model <?=$name?>
+
+ *
+<?php foreach ($columns as $column) { $column->type = strpos($column->getDataType(), 'int') !== false ? 'string' : 'int';?>
+ * @property <?=$column->type?> $<?=$column->getName()?>
+
+<?php }?>
+ *
+ */
+class <?=$name?> extends RowGateway
+{
+
+    protected $data = [
+<?php foreach ($columns as $column) { ?>
+        '<?=$column->getName()?>' => null,
+<?php } ?>
+    ];
+
+<?php foreach ($columns as $column) {
+    $name = $column->getName();
+    $caseName = str_replace(' ', '', (ucwords(str_replace('_', ' ', $name))))?>
+    /**
+     * @param <?=$column->type?> $<?=$name?>
+
+     * @return self
+     */
+    public function set<?=$caseName?>($<?=$name?>)
+    {
+        $this-><?=$name?> = $<?=$name?>;
+        return $this;
+    }
+
+    /**
+     *
+     * @return <?=$column->type?>
+
+     */
+    public function get<?=$caseName?>()
+    {
+        return $this-><?=$name?>;
+    }
+
+<?php }?>
+}
