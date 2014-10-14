@@ -1,6 +1,8 @@
 {
     "name": "moln/gzfextra",
     "license": "MIT",
+    "keywords": ["zfextra","zendframework"],
+    "description": "Global Zend framework 2 extra",
     "authors": [
         {
             "name": "Moln",
