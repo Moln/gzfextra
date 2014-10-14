@@ -1,4 +1,4 @@
 gzfextra
 ========
 
-Global zend framework extra
+Global zend framework 2 extra
