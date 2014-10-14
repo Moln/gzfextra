@@ -64,7 +64,7 @@ class Kendo implements UiAdapterInterface
 
         $order = array();
         foreach ($this->sort as $sort) {
-            $order[] = $sort['field'] . ' ' . $sort['dir'];
+            $order[$sort['field']] = $sort['dir'];
         }
         return $order;
     }
