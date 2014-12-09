@@ -1,6 +1,7 @@
 <?php
 namespace Gzfextra\Mvc\Controller\Plugin\UiAdapter;
 
+use Zend\Db\Sql\Predicate\Predicate;
 use Zend\Db\Sql\Where;
 use Zend\Http\Request;
 use Zend\View\Model\JsonModel;
@@ -21,6 +22,25 @@ class Kendo implements UiAdapterInterface
         $this->sort   = $request->getPost('sort');
     }
 
+    private function parseFilters($filterGroup, $fieldMap)
+    {
+        $filters = $filterGroup['filters'];
+        $logic   = $filterGroup['logic'];
+
+        $predicate = new Predicate();
+        foreach ($filters as $filter) {
+            if (isset($filter['filters'])) {
+                if (count($filter['filters']) == 0) continue;
+                $predicate->addPredicate($this->parseFilters($filter, $fieldMap));
+            } else {
+                $this->addWhere($predicate, $filter, $fieldMap);
+            }
+            $predicate->$logic;
+        }
+
+        return $predicate;
+    }
+
     /**
      * @param array $fieldMap
      *
@@ -32,26 +52,8 @@ class Kendo implements UiAdapterInterface
             return array();
         }
 
-        if (empty($this->filter['filters'][0]['filters'])) {
-            $filter       = $this->filter;
-            $this->filter = array('filters' => array($filter));
-        }
-
         $where = new Where();
-
-        foreach ($this->filter['filters'] as $filters) {
-            $logic = isset($filters['logic']) && $filters['logic'] == 'or' ? 'or' : 'and';
-
-            $filter = array_shift($filters['filters']);
-
-            $this->addWhere($where, $filter, $fieldMap);
-            if (!empty($filters['filters'])) {
-                $filter = array_shift($filters['filters']);
-                $where->{$logic};
-                $this->addWhere($where, $filter, $fieldMap);
-            }
-            $where->and;
-        }
+        $where->addPredicate($this->parseFilters($this->filter, $fieldMap));
 
         return $where;
     }
@@ -102,7 +104,7 @@ class Kendo implements UiAdapterInterface
         return new JsonModel(array('errors' => $messages));
     }
 
-    protected function addWhere(Where $where, $filter, $fieldMap = array())
+    protected function addWhere(Predicate $where, $filter, $fieldMap = array())
     {
         $operatorMap = array(
             'eq'         => 'equalTo',
