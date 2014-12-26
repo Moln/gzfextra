@@ -134,6 +134,15 @@ class Kendo implements UiAdapterInterface
             }
         }
 
+        if (isset($fieldMap[$filter['field']])) {
+            if (is_string($fieldMap[$filter['field']])) {
+                $filter['field'] = $fieldMap[$filter['field']];
+            } else if (is_callable($fieldMap[$filter['field']])) {
+                $filter = new \ArrayObject($filter);
+                call_user_func($fieldMap[$filter['field']], $filter);
+            }
+        }
+
         if (in_array($filter['operator'], ['startswith', 'endswith', 'contains'])) {
             $filter['value'] = str_replace(['_', '%'], ['\\_', '\\%'], $filter['value']);
         }
@@ -152,14 +161,6 @@ class Kendo implements UiAdapterInterface
                 break;
         }
 
-        if (isset($fieldMap[$filter['field']])) {
-            if (is_string($fieldMap[$filter['field']])) {
-                $filter['field'] = $fieldMap[$filter['field']];
-            } else if (is_callable($fieldMap[$filter['field']])) {
-                $filter = new \ArrayObject($filter);
-                call_user_func($fieldMap[$filter['field']], $filter);
-            }
-        }
         $where->{$operatorMap[$filter['operator']]}($filter['field'], $filter['value']);
     }
 }
