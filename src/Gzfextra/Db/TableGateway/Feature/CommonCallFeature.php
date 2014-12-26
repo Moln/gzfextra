@@ -2,10 +2,13 @@
 
 namespace Gzfextra\Db\TableGateway\Feature;
 
+use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\RowGateway\RowGatewayInterface;
 use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Where;
 use Zend\Db\TableGateway\Feature\AbstractFeature;
+use Zend\Paginator\Adapter\Callback;
 use Zend\Paginator\Adapter\DbSelect;
 use Zend\Paginator\Paginator;
 
@@ -75,7 +78,26 @@ class CommonCallFeature extends AbstractFeature
                 $select->where($where);
             }
 
-            $adapter = new DbSelect($select, $this->getAdapter());
+            if (count($select->getRawState(Select::GROUP))) {
+                $adapter = new DbSelect($select, $this->getAdapter());
+            } else {
+                $adapter = new Callback(
+                    function ($offset, $itemCountPerPage) use ($select) {
+                        $select->offset($offset);
+                        $select->limit($itemCountPerPage);
+
+                        $statement = $this->sql->prepareStatementForSqlObject($select);
+                        $result    = $statement->execute();
+
+                        $resultSet = new ResultSet();
+                        $resultSet->initialize($result);
+
+                        return $resultSet;
+                    }, function () use ($select) {
+                        return $this->fetchCount($select);
+                    }
+                );
+            }
         }
 
         return new Paginator($adapter);
