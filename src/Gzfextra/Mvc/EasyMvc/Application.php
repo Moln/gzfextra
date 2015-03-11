@@ -13,7 +13,7 @@ use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\ArrayUtils;
-use Zend\View\Helper\ViewModel;
+use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
 
 /**
@@ -119,7 +119,10 @@ EOT;
                 header('Content-Type: application/json');
                 echo $result->serialize();
             } else if ($result instanceof ViewModel) {
-                $this->notFound('Class not found');
+                if ($this->response->getStatusCode() == 404) {
+                    $this->notFound('Class not found');
+                } else {
+                }
             } else if ($result instanceof Response) {
                 $this->sendResponse($result);
             }

@@ -66,7 +66,6 @@ class TableGatewayAbstractServiceFactory implements AbstractFactoryInterface
         $dbAdapter = $serviceLocator->get(isset($config['adapter']) ? $config['adapter'] : 'db');
 
         /** @var \Zend\Db\TableGateway\TableGateway $table */
-
         if (isset($config['schema'])) {
             $config['table'] = new TableIdentifier($config['table'], $config['schema']);
         }
@@ -87,15 +86,21 @@ class TableGatewayAbstractServiceFactory implements AbstractFactoryInterface
             if ($config['row'] === true) {
                 $config['row'] = 'Zend\Db\RowGateway\RowGateway';
             }
-            if (!class_exists($config['row'])) {
-                throw new \RuntimeException("Class '{$config['row']}' not found ");
+
+            if (is_string($config['row'])) {
+                if (!class_exists($config['row'])) {
+                    throw new \RuntimeException("Class '{$config['row']}' not found ");
+                }
+
+                $rowGatewayPrototype = new $config['row'](
+                    $config['primary'],
+                    $config['table'],
+                    $dbAdapter, $table->getSql()
+                );
+            } else if (is_object($config['row'])) {
+                $rowGatewayPrototype = $config['row'];
             }
 
-            $rowGatewayPrototype = new $config['row'](
-                $config['primary'],
-                $config['table'],
-                $dbAdapter, $table->getSql()
-            );
             $table->getResultSetPrototype()->setArrayObjectPrototype($rowGatewayPrototype);
         }
 

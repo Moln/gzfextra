@@ -19,6 +19,8 @@ use Zend\Paginator\Paginator;
  * @package Gzfextra\Db\TableGateway\Feature
  * @author  Xiemaomao
  * @version $Id$
+ *
+ * @method \Zend\Db\Adapter\Adapter getAdapter
  */
 class CommonCallFeature extends AbstractFeature
 {
@@ -81,7 +83,7 @@ class CommonCallFeature extends AbstractFeature
             if (count($select->getRawState(Select::GROUP))) {
                 $adapter = new DbSelect($select, $this->getAdapter());
             } else {
-                $count = null;
+                $count   = null;
                 $adapter = new Callback(
                     function ($offset, $itemCountPerPage) use ($select) {
                         $select->offset($offset);
@@ -92,15 +94,13 @@ class CommonCallFeature extends AbstractFeature
 
                         $resultSet = new ResultSet();
                         $resultSet->initialize($result);
-
                         return $resultSet;
-                    }, function () use ($select, $count) {
+                    }, function () use ($select, &$count) {
                         if ($count === null) {
                             $select = clone $select;
-
                             $select->columns(array('Gzfextra_Db_Count' => new Expression('count(1)')));
                             $result = $this->sql->prepareStatementForSqlObject($select)->execute()->current();
-                            $count = $result['Gzfextra_Db_Count'];
+                            $count  = $result['Gzfextra_Db_Count'];
                         }
                         return $count;
                     }

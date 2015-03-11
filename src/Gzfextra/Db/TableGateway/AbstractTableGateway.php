@@ -57,7 +57,7 @@ abstract class AbstractTableGateway extends ZendTableGateway
      *
      * @return ServiceLocatorInterface
      */
-    protected static function getServiceLocator()
+    public static function getServiceLocator()
     {
         return self::$serviceLocator;
     }
@@ -74,5 +74,21 @@ abstract class AbstractTableGateway extends ZendTableGateway
             $data = new \ArrayObject($data);
         }
         return parent::save($data);
+    }
+
+
+    /**
+     * @return bool
+     */
+    public static function hasInstance()
+    {
+        $className = get_called_class();
+        if (isset(self::$tableInstances[$className])) {
+            return true;
+        }
+
+        $classNameSep = explode('\\', $className);
+        $config       = end($classNameSep);
+        return self::getServiceLocator() && self::getServiceLocator()->has($config);
     }
 }
