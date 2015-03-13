@@ -99,6 +99,8 @@ class TableGatewayAbstractServiceFactory implements AbstractFactoryInterface
                 );
             } else if (is_object($config['row'])) {
                 $rowGatewayPrototype = $config['row'];
+            } else {
+                throw new \InvalidArgumentException('Error row argument');
             }
 
             $table->getResultSetPrototype()->setArrayObjectPrototype($rowGatewayPrototype);

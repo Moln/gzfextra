@@ -1,4 +1,13 @@
 gzfextra
 ========
 
-Global zend framework 2 extra
+Zend framework 2 extra
+
+
+```
+{
+    "require": {
+        "moln/gzfextra": "1.0"
+    }
+}
+```
