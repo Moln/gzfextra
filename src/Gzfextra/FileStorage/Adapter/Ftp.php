@@ -67,7 +67,7 @@ class Ftp extends AbstractStorageAdapter
         }
 
         if (!$target) {
-            /** @var \Gzfextra\Filter\File\RenameUpload $filter */
+            /** @var \Gzfextra\FileStorage\Filter\RenameUpload $filter */
             $filter = $this->getFilter('renameupload');
             $target = $filter->getFinalTarget($value);
         }
