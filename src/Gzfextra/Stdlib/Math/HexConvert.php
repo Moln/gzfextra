@@ -5,9 +5,7 @@ namespace Gzfextra\Stdlib\Math;
 /**
  * HexConvert, 16进制, 32进制, 64进制转换
  *
- * @package My\Stdlib\Math
- * @author  Xiemaomao
- * @version $Id: HexConvert.php 1279 2014-01-24 01:13:41Z maomao $
+ * @author  moln.xie@gmail.com
  */
 class HexConvert
 {

@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * User: xiemaomao
+ * User: xiemoln.xie@gmail.com
  * Date: 14-5-12
  * Time: 下午6:07
  */

@@ -2,7 +2,7 @@
     "name": "moln/gzfextra",
     "license": "MIT",
     "keywords": ["zfextra","zendframework", "zf2"],
-    "description": "Global Zend framework 2 extra",
+    "description": "Zend framework 2 extra",
     "authors": [
         {
             "name": "Moln",
@@ -16,6 +16,12 @@
     },
     "require": {
         "php": ">=5.4",
-        "zendframework/zendframework": "2.*"
+        "zendframework/zend-db": "2.*",
+        "zendframework/zend-servicemanager": "2.*",
+        "zendframework/zend-eventmanager": "2.*"
+    },
+    "suggest": {
+        "zendframework/zend-validator": "2.*",
+        "zendframework/zend-view": "2.*"
     }
 }

@@ -9,11 +9,8 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Class TableGatewayAbstractServiceFactory
- * @package Gzfextra\Db
- * @author Xiemaomao
- * @version $Id$
+ * @author moln.xie@gmail.com
  */
-
 class TableGatewayAbstractServiceFactory implements AbstractFactoryInterface
 {
     private $config;
@@ -99,6 +96,8 @@ class TableGatewayAbstractServiceFactory implements AbstractFactoryInterface
                 );
             } else if (is_object($config['row'])) {
                 $rowGatewayPrototype = $config['row'];
+            } else {
+                throw new \InvalidArgumentException('Error row argument');
             }
 
             $table->getResultSetPrototype()->setArrayObjectPrototype($rowGatewayPrototype);

@@ -6,9 +6,7 @@ use Zend\Db\TableGateway\Feature\FeatureSet as ZendFeatureSet;
 
 /**
  * Class CommonCallFeature
- * @package Gzfextra\Db\TableGateway\Feature
- * @author Xiemaomao
- * @version $Id$
+ * @author moln.xie@gmail.com
  */
 class FeatureSet extends ZendFeatureSet
 {
