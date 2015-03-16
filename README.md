@@ -62,7 +62,7 @@ class UserTable extends ZendTableGateway
 ```
 
 控制器调用
-```
+```php
 public function indexAction()
 {
     $users = $this->getServiceLocator()->get('UserTable');
@@ -77,7 +77,7 @@ ZF2 自带的 `Zend\Mvc\ModuleRouteListener` 不方便, 每新的 `Controller` �
 
 ### Example - 使用举例
 
-```
+```php
 class Module
 {
     public function onBootstrap(MvcEvent $e)
@@ -196,7 +196,7 @@ return array(
 ```
 
 控制器调用
-```
+```php
 public function indexAction()
 {
     $fileStorage = $this->getServiceLocator()->get('ImageFileStorage');
