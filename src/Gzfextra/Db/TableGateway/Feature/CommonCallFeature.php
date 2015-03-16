@@ -16,9 +16,7 @@ use Zend\Paginator\Paginator;
 /**
  * Class CommonCallFeature
  *
- * @package Gzfextra\Db\TableGateway\Feature
- * @author  Xiemaomao
- * @version $Id$
+ * @author  moln.xie@gmail.com
  *
  * @method \Zend\Db\Adapter\Adapter getAdapter
  */

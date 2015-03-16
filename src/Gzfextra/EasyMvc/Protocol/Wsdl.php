@@ -4,9 +4,8 @@ namespace Gzfextra\Mvc\EasyMvc\Protocol;
 /**
  * Wsdl.php
  *
- * @author   maomao
+ * @author   moln.xie@gmail.com
  * @DateTime 12-7-20 下午2:14
- * @version  $Id: Wsdl.php 1275 2014-01-23 23:10:26Z maomao $
  */
 class Wsdl extends AbstractProtocol
 {

@@ -6,9 +6,7 @@ use Zend\Filter\StringToLower;
 /**
  * Class LowerCaseName
  *
- * @package Gzfextra\Filter\File
  * @author  Moln Xie
- * @version $Id$
  */
 class LowerCaseName extends StringToLower
 {

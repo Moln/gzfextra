@@ -9,11 +9,8 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Class TableGatewayAbstractServiceFactory
- * @package Gzfextra\Db
- * @author Xiemaomao
- * @version $Id$
+ * @author moln.xie@gmail.com
  */
-
 class TableGatewayAbstractServiceFactory implements AbstractFactoryInterface
 {
     private $config;

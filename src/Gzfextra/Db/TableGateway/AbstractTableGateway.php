@@ -9,9 +9,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 /**
  * Class AbstractTableGateway
  *
- * @package Gzfextra\Db
- * @author  Xiemaomao
- * @version $Id$
+ * @author  moln.xie@gmail.com
  *
  * @method int fetchCount($where)
  * @method \ArrayObject|\Zend\Db\RowGateway\RowGateway find($id)

@@ -1,11 +1,4 @@
 <?php
-/**
- *
- * User: xiemaomao
- * Date: 14-5-13
- * Time: 下午1:59
- */
-
 namespace Gzfextra\Stdlib;
 
 

@@ -4,9 +4,8 @@ namespace Gzfextra\Mvc\EasyMvc\Protocol;
 /**
  * ProtocolAbstract.php
  *
- * @author   maomao
+ * @author   moln.xie@gmail.com
  * @DateTime 12-7-23 下午5:18
- * @version  $Id: ProtocolAbstract.php 1218 2013-08-08 09:51:29Z maomao $
  */
 abstract class AbstractProtocol implements ProtocolInterface
 {

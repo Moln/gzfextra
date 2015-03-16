@@ -4,9 +4,8 @@ namespace Gzfextra\Mvc\EasyMvc;
 /**
  * ServiceFactory.php
  *
- * @author   maomao
+ * @author   moln.xie@gmail.com
  * @DateTime 12-7-23 下午2:33
- * @version  $Id: Service.php 790 2013-03-15 08:56:56Z maomao $
  */
 class Service
 {

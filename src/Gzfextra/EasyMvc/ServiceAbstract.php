@@ -4,9 +4,8 @@ namespace Gzfextra\Mvc\EasyMvc;
 /**
  * ServiceAbstract.php
  *
- * @author   maomao
+ * @author   moln.xie@gmail.com
  * @DateTime 12-7-24 上午11:24
- * @version  $Id: ServiceAbstract.php 1163 2013-07-26 05:30:12Z maomao $
  */
 abstract class ServiceAbstract
 {

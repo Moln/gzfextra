@@ -1,15 +1,13 @@
 <?php
 namespace Gzfextra\FileStorage\Adapter;
 
-use Gzfextra\Client\Ftp as FtpClient;
+use Gzfextra\FileStorage\Client\Ftp as FtpClient;
 use Gzfextra\FileStorage\Filter\RenameUpload;
 
 /**
  * Class Ftp
  *
- * @package Gzfextra\File\Storage
- * @author  Xiemaomao
- * @version $Id$
+ * @author  moln.xie@gmail.com
  */
 class Ftp extends AbstractStorageAdapter
 {

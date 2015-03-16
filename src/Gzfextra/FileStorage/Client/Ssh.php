@@ -1,13 +1,12 @@
 <?php
-
-namespace Gzfextra\FileStorage\Adapter;
+namespace Gzfextra\FileStorage\Client;
 
 /**
  * Class Ssh
  *
  * @author  Moln Xie
  */
-class Sftp
+class Ssh
 {
 
 }

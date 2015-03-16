@@ -5,9 +5,8 @@ namespace Gzfextra\FileStorage\Adapter;
 /**
  * Class FileInfo
  *
- * @package Gzfextra\File\Storage
+ *
  * @author  Moln Xie
- * @version $Id$
  */
 class FileInfo
 {

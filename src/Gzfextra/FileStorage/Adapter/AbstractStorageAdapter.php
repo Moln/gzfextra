@@ -8,9 +8,8 @@ use Zend\Validator\ValidatorChain;
 /**
  * Class AbstractStorage
  *
- * @package Gzfextra\File\Storage
+ *
  * @author  Moln Xie
- * @version $Id$
  */
 abstract class AbstractStorageAdapter implements StorageInterface
 {

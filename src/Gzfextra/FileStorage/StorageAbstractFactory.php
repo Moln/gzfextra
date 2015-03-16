@@ -7,9 +7,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Class StorageAbstractFactory
- * @package Gzfextra\FileStorage
  * @author Moln xie
- * @version $Id$
  */
 class StorageAbstractFactory implements AbstractFactoryInterface
 {

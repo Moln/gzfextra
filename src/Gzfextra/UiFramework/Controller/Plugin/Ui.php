@@ -1,11 +1,6 @@
 <?php
-/**
- * platform-admin Ui.php
- *
- * @DateTime 13-5-20 下午5:06
- */
 
-namespace Gzfextra\Mvc\Controller\Plugin;
+namespace Gzfextra\UiFramework\Controller\Plugin;
 
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 use Zend\Stdlib\DispatchableInterface;
@@ -13,9 +8,7 @@ use Zend\Stdlib\DispatchableInterface;
 /**
  * Class Ui
  *
- * @package Gzfextra\Mvc\Controller\Plugin
  * @author  Moln Xie
- * @version $Id$
  */
 class Ui extends AbstractPlugin
 {

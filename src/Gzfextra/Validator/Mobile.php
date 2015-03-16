@@ -8,9 +8,7 @@ use Zend\Validator\AbstractValidator;
 /**
  * Class Mobile
  *
- * @package Gzfextra\Validator
- * @author  Xiemaomao
- * @version $Id$
+ * @author  moln.xie@gmail.com
  */
 class Mobile extends AbstractValidator
 {

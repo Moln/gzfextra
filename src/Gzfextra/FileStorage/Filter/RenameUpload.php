@@ -7,9 +7,7 @@ use Zend\Filter\File\RenameUpload as ZendRenameUpload;
 /**
  * Class RenameUpload
  *
- * @package Gzfextra\Filter\File
  * @author  Moln Xie
- * @version $Id$
  */
 class RenameUpload extends ZendRenameUpload
 {

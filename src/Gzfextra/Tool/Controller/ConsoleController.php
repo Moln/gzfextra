@@ -2,21 +2,18 @@
 
 namespace Gzfextra\Module\Controller;
 
-use Zend\Db\RowGateway\RowGateway;
-use Zend\View\Resolver;
-use Zend\Db\Metadata\Metadata;
-use Zend\Http\Client;
-use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Config\Factory as ConfigFactory;
+use Zend\Db\Metadata\Metadata;
+use Zend\Db\RowGateway\RowGateway;
+use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\View\Renderer\PhpRenderer;
+use Zend\View\Resolver;
 
 /**
  * Class ConsoleController
  *
- * @package Gzfextra\Module\Controller
- * @author  Xiemaomao
- * @version $Id$
+ * @author  moln.xie@gmail.com
  */
 class ConsoleController extends AbstractActionController
 {

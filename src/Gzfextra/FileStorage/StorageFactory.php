@@ -8,9 +8,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 /**
  * Class StorageFactory
  *
- * @package Gzfextra\File
  * @author  Moln Xie
- * @version $Id$
  */
 class StorageFactory implements FactoryInterface
 {

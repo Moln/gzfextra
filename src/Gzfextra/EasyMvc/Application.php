@@ -13,15 +13,13 @@ use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\ArrayUtils;
-use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
+use Zend\View\Model\ViewModel;
 
 /**
  * Class Application
  *
- * @package Gzfextra\Mvc\EasyMvc
- * @author  Xiemaomao
- * @version $Id$
+ * @author  moln.xie@gmail.com
  */
 class Application implements ApplicationInterface
 {

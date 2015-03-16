@@ -1,5 +1,5 @@
 <?php
-namespace Gzfextra\Mvc\Controller\Plugin\UiAdapter;
+namespace Gzfextra\UiFramework\Controller\Plugin\UiAdapter;
 
 use Zend\Db\Sql\Predicate\Predicate;
 use Zend\Db\Sql\Where;
@@ -8,9 +8,7 @@ use Zend\View\Model\JsonModel;
 
 /**
  * Class Kendo
- * @package Platform\Mvc\Controller\Plugin
  * @author Moln Xie
- * @version $Id$
  */
 class Kendo implements UiAdapterInterface
 {

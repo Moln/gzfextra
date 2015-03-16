@@ -5,9 +5,7 @@ namespace Gzfextra\FileStorage\Adapter;
 /**
  * Class FileSystem
  *
- * @package Gzfextra\File\Storage
- * @author  Xiemaomao
- * @version $Id$
+ * @author  moln.xie@gmail.com
  */
 class FileSystem extends AbstractStorageAdapter
 {

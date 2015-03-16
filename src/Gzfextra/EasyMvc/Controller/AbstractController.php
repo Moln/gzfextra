@@ -4,7 +4,6 @@ namespace Gzfextra\Mvc\EasyMvc\Controller;
 
 use Gzfextra\Mvc\EasyMvc\Application;
 use Zend\Mvc\Controller\PluginManager;
-use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\DispatchableInterface;
 use Zend\Stdlib\RequestInterface;
@@ -14,9 +13,7 @@ use Zend\Stdlib\ResponseInterface;
 /**
  * Class AbstractController
  *
- * @package Gzfextra\Mvc\EasyMvc\Controller
- * @author  Xiemaomao
- * @version $Id$
+ * @author  moln.xie@gmail.com
  */
 abstract class AbstractController implements DispatchableInterface
 {

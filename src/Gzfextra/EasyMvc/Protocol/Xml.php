@@ -7,9 +7,8 @@ use Zend\Code\Reflection\DocBlockReflection;
 /**
  * Xml.php
  *
- * @author   maomao
+ * @author   moln.xie@gmail.com
  * @DateTime 12-7-24 上午11:00
- * @version  $Id: Xml.php 1210 2013-08-08 01:49:52Z maomao $
  */
 class Xml extends AbstractProtocol
 {

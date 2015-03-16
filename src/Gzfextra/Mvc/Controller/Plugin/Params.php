@@ -7,9 +7,7 @@ use Zend\Mvc\Controller\Plugin\Params as ZendParams;
 /**
  * Class Params
  *
- * @package Gzfextra\Mvc\Controller\Plugin
- * @author  Xiemaomao
- * @version $Id$
+ * @author  moln.xie@gmail.com
  */
 class Params extends ZendParams
 {

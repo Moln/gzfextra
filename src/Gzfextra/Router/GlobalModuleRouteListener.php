@@ -10,13 +10,13 @@ use Zend\Mvc\MvcEvent;
 
 /**
  * Class GlobalModuleRouteListener
- * @package Gzfextra\Mvc
- * @author Xiemaomao
- * @version $Id$
+ * @author moln.xie@gmail.com
  */
 class GlobalModuleRouteListener implements ListenerAggregateInterface
 {
     use ListenerAggregateTrait;
+
+    const ORIGINAL_CONTROLLER = '__CONTROLLER__';
 
     public static function getDefaultRouterConfig()
     {
@@ -74,7 +74,9 @@ class GlobalModuleRouteListener implements ListenerAggregateInterface
         $controller = $matches->getParam('controller');
 
         if ($module && $controller && strpos($controller, '\\') === false) {
-            $matches->setParam('controller_name', $controller);
+
+            //ZF2 ModuleRouteListener::ORIGINAL_CONTROLLER
+            $matches->setParam(self::ORIGINAL_CONTROLLER, $controller);
 
             /** @var \Zend\Mvc\Controller\ControllerManager $controllerLoader */
             $controllerLoader = $e->getApplication()->getServiceManager()->get('ControllerLoader');

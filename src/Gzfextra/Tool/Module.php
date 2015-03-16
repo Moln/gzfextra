@@ -9,9 +9,7 @@ use Zend\Mvc\MvcEvent;
 /**
  * Class Module
  *
- * @package Gzfextra
- * @author  Xiemaomao
- * @version $Id$
+ * @author  moln.xie@gmail.com
  */
 class Module
 {
@@ -40,7 +38,7 @@ class Module
         if (PHP_SAPI == 'cli') {
             return include __DIR__ . '/../../../config/module.cli-config.php';
         }
-        return [];
+        return GlobalModuleRouteListener::getDefaultRouterConfig();
     }
 
     public function getConsoleUsage(AbstractAdapter $console)

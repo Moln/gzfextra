@@ -1,11 +1,5 @@
 <?php
-/**
- * platform-admin UiAdapterInterface.php
- *
- * @DateTime 13-5-21 下午2:35
- */
-
-namespace Gzfextra\Mvc\Controller\Plugin\UiAdapter;
+namespace Gzfextra\UiFramework\Controller\Plugin\UiAdapter;
 
 use Zend\Http\Request;
 

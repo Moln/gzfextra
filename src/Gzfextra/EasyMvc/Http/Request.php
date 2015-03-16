@@ -2,20 +2,15 @@
 
 namespace Gzfextra\Mvc\EasyMvc\Http;
 
-use Gzfextra\Stdlib\InstanceTrait;
 use Zend\Http\Header\Cookie;
-use Zend\Stdlib\Message;
 use Zend\Stdlib\Parameters;
 use Zend\Stdlib\ParametersInterface;
-use Zend\Stdlib\RequestInterface;
 use Zend\Uri\Http as HttpUri;
 
 /**
  * Class Request
  *
- * @package Gzfextra\Mvc\EasyMvc\Http
- * @author  Xiemaomao
- * @version $Id$
+ * @author  moln.xie@gmail.com
  */
 class Request extends \Zend\Http\Request
 {

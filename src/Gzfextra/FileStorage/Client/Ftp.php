@@ -1,5 +1,5 @@
 <?php
-namespace Gzfextra\Client;
+namespace Gzfextra\FileStorage\Client;
 
 use Gzfextra\Stdlib\InstanceTrait;
 
@@ -7,9 +7,7 @@ use Gzfextra\Stdlib\InstanceTrait;
  * Class Ftp
  * Copy from self
  *
- * @package Gzfextra\Ftp
- * @author  Xiemaomao
- * @version $Id$
+ * @author  moln.xie@gmail.com
  */
 class Ftp
 {

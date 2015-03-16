@@ -7,9 +7,8 @@ use Zend\Serializer\Serializer;
 /**
  * Serialize.php
  *
- * @author   maomao
+ * @author   moln.xie@gmail.com
  * @DateTime 12-7-23 下午5:16
- * @version  $Id: Serialize.php 790 2013-03-15 08:56:56Z maomao $
  */
 class Serialize extends AbstractProtocol
 {
