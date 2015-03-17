@@ -27,12 +27,14 @@ class FileSystem extends AbstractStorageAdapter
         $list = glob($this->getDefaultPath() . trim($directory, '\\/') . '/*');
         if ($showDetail) {
             foreach ($list as &$file) {
-                $file = new FileInfo(array(
-                    'name'  => basename($file),
-                    'size'  => filesize($file),
-                    'mtime' => filemtime($file),
-                    'type'  => is_dir($file) ? 'directory' : 'file',
-                ));
+                $file = new FileInfo(
+                    array(
+                        'name' => basename($file),
+                        'size' => filesize($file),
+                        'mtime' => filemtime($file),
+                        'type' => is_dir($file) ? 'directory' : 'file',
+                    )
+                );
             }
 
             return $list;
@@ -43,13 +45,21 @@ class FileSystem extends AbstractStorageAdapter
 
     public function mkdirs($path, $mode = 0777)
     {
-        $path = $this->getDefaultPath() . ltrim(str_replace(array('./', '../'), '', $path), '\\/');
+        $path = $this->getDefaultPath() .
+            str_replace(
+                array('/', '\\'),
+                DIRECTORY_SEPARATOR,
+                trim(str_replace(array('./', '../'), '', $path), '\\/')
+            );
 
-        $paths = explode(
-            DIRECTORY_SEPARATOR,
-            str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, trim($path, '\\/'))
-        );
-        $root  = '';
+        $root = '';
+
+        //Windows
+        if (strpos($path, ':' . DIRECTORY_SEPARATOR)) {
+            list($root, $path) = explode(DIRECTORY_SEPARATOR, $path, 2);
+        }
+
+        $paths = explode(DIRECTORY_SEPARATOR, $path);
         foreach ($paths as $dir) {
             $root .= '/' . $dir;
             if (!is_dir($root) && !mkdir($root, $mode)) {
@@ -61,11 +71,11 @@ class FileSystem extends AbstractStorageAdapter
 
     public function upload($value)
     {
-        $filter = $this->getFilter('renameupload');
-        $target = $filter->getTarget();
-        $filter->setTarget($this->getDefaultPath() . ltrim($target, '\\/'));
-
-        return $this->getFilterChain()->filter($value);
+        $current = getcwd();
+        chdir($this->getDefaultPath());
+        $value = $this->getFilterChain()->filter($value);
+        chdir($current);
+        return $value;
     }
 
     /**

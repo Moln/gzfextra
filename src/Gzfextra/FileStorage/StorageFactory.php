@@ -32,9 +32,9 @@ class StorageFactory implements FactoryInterface
             throw new \RuntimeException('Unknown "options" config.');
         }
 
-        $className = __NAMESPACE__ . '\\' . ucfirst($config['type']);
+        $className = __NAMESPACE__ . '\\Adapter\\' . ucfirst($config['type']);
         if (!class_exists($className)
-            && in_array(__NAMESPACE__ . '\\' . 'StorageInterface', class_implements($className))
+            || !in_array(__NAMESPACE__ . '\\Adapter\\StorageInterface', class_implements($className))
         ) {
             throw new \RuntimeException('Error config type:' . $config['type']);
         }
@@ -51,8 +51,8 @@ class StorageFactory implements FactoryInterface
         $fm = $serviceLocator->get('FilterManager');
         $this->setFileAlias($vm, $fm);
 
-        $fm->setInvokableClass('lowercasename', 'Gzfextra\Filter\File\LowerCaseName');
-        $fm->setInvokableClass('renameupload', 'Gzfextra\Filter\File\RenameUpload');
+        $fm->setInvokableClass('lowercasename', __NAMESPACE__ . '\Filter\LowerCaseName');
+        $fm->setInvokableClass('renameupload', __NAMESPACE__ . '\Filter\RenameUpload');
 
         $fileStorage->getValidatorChain()->setPluginManager($vm);
         $fileStorage->getFilterChain()->setPluginManager($fm);
