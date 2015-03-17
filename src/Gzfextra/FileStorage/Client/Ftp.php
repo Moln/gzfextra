@@ -14,24 +14,23 @@ class Ftp
     use InstanceTrait;
 
     const FTP_ERR_CONNECT_TO_SERVER = 'Connect error';
-    const FTP_ERR_USER_NO_LOGGIN    = 'Login error';
-    const FTP_ERR_CHDIR             = 'Error "chdir"';
-    const FTP_ERR_MKDIR             = 'Error "mkdir"';
-    const FTP_ERR_SOURCE_READ       = 'Source read error';
-    const FTP_ERR_TARGET_WRITE      = 'Target write error';
-    const FTP_ERR_SITE              = 'Error "site"';
-    const FTP_ERR_CHMOD             = 'Error "chmod"';
+    const FTP_ERR_USER_NO_LOGGIN = 'Login error';
+    const FTP_ERR_CHDIR = 'Error "chdir"';
+    const FTP_ERR_MKDIR = 'Error "mkdir"';
+    const FTP_ERR_SOURCE_READ = 'Source read error';
+    const FTP_ERR_TARGET_WRITE = 'Target write error';
+    const FTP_ERR_SITE = 'Error "site"';
+    const FTP_ERR_CHMOD = 'Error "chmod"';
 
-    protected $config
-        = array(
-            'host'     => null,
-            'username' => null,
-            'password' => null,
-            'ssl'      => false,
-            'port'     => 21,
-            'timeout'  => 10,
-            'pasv'     => false,
-        );
+    protected $config = array(
+        'host'     => null,
+        'username' => null,
+        'password' => null,
+        'ssl'      => false,
+        'port'     => 21,
+        'timeout'  => 10,
+        'pasv'     => false,
+    );
 
     protected $func;
     protected $cid;
@@ -147,11 +146,10 @@ class Ftp
 
     public function mkdirs($path, $mode = 0777)
     {
-        $paths  = explode(
-            DIRECTORY_SEPARATOR,
-            str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, trim($path, '/\/'))
-        );
-        $root   = '';
+        $path  = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
+        $root  = $path[0] == DIRECTORY_SEPARATOR ? '' : '.';
+        $paths = explode(DIRECTORY_SEPARATOR, trim($path, '\\/'));
+
         $result = false;
         foreach ($paths as $dir) {
             if ($dir == '.' || $dir == '..') {
@@ -222,8 +220,7 @@ class Ftp
 
     public function chmod($filename, $mod = 0777)
     {
-        return @
-            ftp_chmod($this->getConnect(), $mod, $filename) or $this->setError(self::FTP_ERR_CHMOD);
+        return @ftp_chmod($this->getConnect(), $mod, $filename) or $this->setError(self::FTP_ERR_CHMOD);
     }
 
     public function pwd()

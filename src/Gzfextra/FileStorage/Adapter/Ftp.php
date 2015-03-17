@@ -55,29 +55,18 @@ class Ftp extends AbstractStorageAdapter
         if (!(is_array($value) && isset($value['tmp_name']))) {
             throw new \InvalidArgumentException('Invalid upload parameter.');
         }
-        $this->ftp->chdir($this->getDefaultPath());
-
-        $target = null;
-        foreach ($this->getFilterChain()->getFilters() as $filter) {
-            if ($filter instanceof RenameUpload) {
-                $target = $filter->getFinalTarget($value);
-                continue;
+        /** @var \Gzfextra\FileStorage\Filter\RenameUpload $filter */
+        $filter = $this->getFilter('renameupload');
+        $filter->setUploadCallback(function ($sourceFile, $targetFile) use ($filter, $value) {
+            $this->ftp->chdir($this->getDefaultPath());
+            $dirname = dirname($targetFile);
+            $this->ftp->mkdirs($dirname, $filter->getMkdirMode());
+            if (!$this->ftp->upload($sourceFile, $targetFile)) {
+                throw new \RuntimeException('Ftp upload error: ' . $this->ftp->getErrorMessage());
             }
-            $value = call_user_func($filter, $value);
-        }
+        });
 
-        if (!$target) {
-            /** @var \Gzfextra\FileStorage\Filter\RenameUpload $filter */
-            $filter = $this->getFilter('renameupload');
-            $target = $filter->getFinalTarget($value);
-        }
-
-        if ($this->ftp->upload($value['tmp_name'], $target)) {
-            $value['tmp_name'] = $target;
-            return $value;
-        } else {
-            throw new \RuntimeException('Ftp upload error: ' . $this->ftp->getErrorMessage());
-        }
+        return $this->getFilterChain()->filter($value);
     }
 
     public function __destruct()
