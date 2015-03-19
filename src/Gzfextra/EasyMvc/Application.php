@@ -1,5 +1,5 @@
 <?php
-namespace Gzfextra\Mvc\EasyMvc;
+namespace Gzfextra\EasyMvc;
 
 use Gzfextra\Stdlib\InstanceTrait;
 use Zend\EventManager\EventManagerInterface;
