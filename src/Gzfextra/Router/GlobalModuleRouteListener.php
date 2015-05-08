@@ -1,6 +1,6 @@
 <?php
 
-namespace Gzfextra\Mvc;
+namespace Gzfextra\Router;
 
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
