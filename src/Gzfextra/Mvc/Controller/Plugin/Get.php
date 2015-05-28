@@ -12,30 +12,10 @@ use Zend\ServiceManager\ServiceManagerAwareInterface;
  * @author Xiemaomao
  * @version $Id$
  */
-class Get extends AbstractPlugin implements ServiceManagerAwareInterface
+class Get extends AbstractPlugin
 {
-    protected $serviceManager;
-
-    /**
-     * @return ServiceManager
-     */
-    public function getServiceManager()
-    {
-        return $this->serviceManager;
-    }
-
-    /**
-     * @param ServiceManager $serviceManager
-     * @return $this
-     */
-    public function setServiceManager(ServiceManager $serviceManager)
-    {
-        $this->serviceManager = $serviceManager;
-        return $this;
-    }
-
     public function __invoke($name, $usePeeringServiceManagers = true)
     {
-        return $this->getServiceManager()->get($name, $usePeeringServiceManagers);
+        return $this->getController()->getServiceLocator()->get($name, $usePeeringServiceManagers);
     }
 }
