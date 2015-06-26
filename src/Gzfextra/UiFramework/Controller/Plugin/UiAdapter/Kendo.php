@@ -8,16 +8,21 @@ use Zend\View\Model\JsonModel;
 
 /**
  * Class Kendo
+ *
  * @author Moln Xie
  */
 class Kendo implements UiAdapterInterface
 {
     protected $filter, $sort;
 
+    /** @var  Request */
+    protected $request;
+
     public function __construct(Request $request)
     {
-        $this->filter = $request->getPost('filter');
-        $this->sort   = $request->getPost('sort');
+        $this->request = $request;
+        $this->filter  = $request->getPost('filter');
+        $this->sort    = $request->getPost('sort');
     }
 
     private function parseFilters($filterGroup, $fieldMap)
@@ -74,8 +79,8 @@ class Kendo implements UiAdapterInterface
         if ($dataTypes) {
             $functions = array(
                 'boolval' => function ($val) {
-                        return (bool)$val;
-                    }
+                    return (bool)$val;
+                }
             );
             foreach ($data as &$row) {
                 foreach ($dataTypes as $key => $type) {
@@ -160,5 +165,14 @@ class Kendo implements UiAdapterInterface
         }
 
         $where->{$operatorMap[$filter['operator']]}($filter['field'], $filter['value']);
+    }
+
+    public function page()
+    {
+        return [
+            'take'     => $this->request->getPost('take'),
+            'page'     => $this->request->getPost('page'),
+            'pageSize' => $this->request->getPost('pageSize'),
+        ];
     }
 }

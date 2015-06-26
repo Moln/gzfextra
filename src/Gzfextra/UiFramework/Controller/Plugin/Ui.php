@@ -50,4 +50,9 @@ class Ui extends AbstractPlugin
     {
         return $this->adapter->errors($messages);
     }
+
+    public function page()
+    {
+        return $this->adapter->page();
+    }
 }
