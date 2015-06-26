@@ -14,6 +14,9 @@ class Kendo implements UiAdapterInterface
 {
     protected $filter, $sort;
 
+    /** @var  Request */
+    protected $request;
+
     public function __construct(Request $request)
     {
         $this->filter = $request->getPost('filter');
@@ -160,5 +163,13 @@ class Kendo implements UiAdapterInterface
         }
 
         $where->{$operatorMap[$filter['operator']]}($filter['field'], $filter['value']);
+    }
+
+    public function page()
+    {
+        return [
+            'page' => $this->request->getPost('page'),
+            'pageSize' => $this->request->getPost('pageSize'),
+        ];
     }
 }
