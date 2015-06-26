@@ -170,9 +170,9 @@ class Kendo implements UiAdapterInterface
     public function page()
     {
         return [
-            'take'     => $this->request->getPost('take'),
-            'page'     => $this->request->getPost('page'),
-            'pageSize' => $this->request->getPost('pageSize'),
+            'take'     => (int)$this->request->getPost('take'),
+            'page'     => (int)$this->request->getPost('page', 1),
+            'pageSize' => (int)$this->request->getPost('pageSize'),
         ];
     }
 }
