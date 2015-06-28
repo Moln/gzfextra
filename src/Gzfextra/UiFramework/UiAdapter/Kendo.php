@@ -1,9 +1,11 @@
 <?php
-namespace Gzfextra\UiFramework\Controller\Plugin\UiAdapter;
+namespace Gzfextra\UiFramework\UiAdapter;
 
+use Gzfextra\Stdlib\OptionsTrait;
 use Zend\Db\Sql\Predicate\Predicate;
 use Zend\Db\Sql\Where;
 use Zend\Http\Request;
+use Zend\Stdlib\InitializableInterface;
 use Zend\View\Model\JsonModel;
 
 /**
@@ -11,18 +13,66 @@ use Zend\View\Model\JsonModel;
  *
  * @author Moln Xie
  */
-class Kendo implements UiAdapterInterface
+class Kendo implements UiAdapterInterface, InitializableInterface
 {
-    protected $filter, $sort;
+    use OptionsTrait;
+
+    protected $filter, $sort, $pageSizes = [15, 20, 50, 100];
 
     /** @var  Request */
     protected $request;
 
-    public function __construct(Request $request)
+    public function __construct($options = [])
     {
-        $this->request = $request;
+        $this->setOptions($options);
+    }
+
+    /**
+     * Init an object
+     *
+     * @return void
+     */
+    public function init()
+    {
+        $request = $this->getRequest();
         $this->filter  = $request->getPost('filter');
         $this->sort    = $request->getPost('sort');
+    }
+
+    /**
+     * @return int[]
+     */
+    public function getPageSizes()
+    {
+        return $this->pageSizes;
+    }
+
+    /**
+     * @param mixed $pageSizes
+     * @return $this
+     */
+    public function setPageSizes($pageSizes)
+    {
+        $this->pageSizes = $pageSizes;
+        return $this;
+    }
+
+    /**
+     * @return Request
+     */
+    public function getRequest()
+    {
+        return $this->request;
+    }
+
+    /**
+     * @param Request $request
+     * @return $this
+     */
+    public function setRequest($request)
+    {
+        $this->request = $request;
+        return $this;
     }
 
     private function parseFilters($filterGroup, $fieldMap)
@@ -169,10 +219,14 @@ class Kendo implements UiAdapterInterface
 
     public function page()
     {
+        $pageSize = current($this->getPageSizes());
+        if (in_array((int)$this->request->getPost('pageSize'), $this->getPageSizes())) {
+            $pageSize = (int)$this->request->getPost('pageSize');
+        }
         return [
             'take'     => (int)$this->request->getPost('take'),
             'page'     => (int)$this->request->getPost('page', 1),
-            'pageSize' => (int)$this->request->getPost('pageSize'),
+            'pageSize' => $pageSize,
         ];
     }
 }

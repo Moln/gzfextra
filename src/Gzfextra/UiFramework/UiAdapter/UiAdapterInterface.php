@@ -1,12 +1,8 @@
 <?php
-namespace Gzfextra\UiFramework\Controller\Plugin\UiAdapter;
-
-use Zend\Http\Request;
+namespace Gzfextra\UiFramework\UiAdapter;
 
 interface UiAdapterInterface
 {
-    public function __construct(Request $request);
-
     public function filter($fieldMap = array());
 
     public function sort();

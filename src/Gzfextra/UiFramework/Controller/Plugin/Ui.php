@@ -2,8 +2,8 @@
 
 namespace Gzfextra\UiFramework\Controller\Plugin;
 
+use Gzfextra\UiFramework\UiAdapterManager;
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
-use Zend\Stdlib\DispatchableInterface;
 
 /**
  * Class Ui
@@ -12,47 +12,58 @@ use Zend\Stdlib\DispatchableInterface;
  */
 class Ui extends AbstractPlugin
 {
-    /**
-     * @var UiAdapter\UiAdapterInterface
-     */
-    protected $adapter;
+    protected $uiAdapterManager;
 
-    public function setController(DispatchableInterface $controller)
+    public function __invoke()
     {
-        parent::setController($controller);
-        $this->adapter = new UiAdapter\Kendo($this->getController()->getRequest());
+        $sl = $this->getServiceLocator();
+        $configs = $sl->get('config');
+
+        if (isset($configs['gzfextra']['ui_adapter_config']['adapter'])) {
+            $uiConfig = $configs['gzfextra']['ui_adapter_config'];
+        } else {
+            $uiConfig = [
+                'adapter' => 'kendo',
+                'options' => [
+                    'pageSizes' => [15, 20, 50, 100]
+                ]
+            ];
+        }
+
+        return $this->getUiAdapterManager()->get($uiConfig['adapter'], $uiConfig['options']);
     }
 
     /**
-     * @param array $fieldMap
-     *
-     * @return \Zend\Db\Sql\Where|array
+     * @return UiAdapterManager
      */
-    public function filter($fieldMap = array())
+    public function getUiAdapterManager()
     {
-        return $this->adapter->filter($fieldMap);
+        if (!$this->uiAdapterManager) {
+            $sl = $this->getServiceLocator();
+            if (!$sl->has('Gzfextra\UiFramework\UiAdapterManager')) {
+                $sl->setFactory('Gzfextra\UiFramework\UiAdapterManager', 'Gzfextra\UiFramework\UiAdapterFactory');
+            }
+
+            $this->uiAdapterManager = $sl->get('Gzfextra\UiFramework\UiAdapterManager');
+        }
+        return $this->uiAdapterManager;
     }
 
     /**
-     * @return array
+     * @param UiAdapterManager $uiAdapterManager
+     * @return $this
      */
-    public function sort()
+    public function setUiAdapterManager(UiAdapterManager $uiAdapterManager)
     {
-        return $this->adapter->sort();
+        $this->uiAdapterManager = $uiAdapterManager;
+        return $this;
     }
 
-    public function result($data, $total = null, array $dataTypes = null)
+    /**
+     * @return \Zend\ServiceManager\ServiceManager
+     */
+    private function getServiceLocator()
     {
-        return $this->adapter->result($data, $total, $dataTypes);
-    }
-
-    public function errors($messages)
-    {
-        return $this->adapter->errors($messages);
-    }
-
-    public function page()
-    {
-        return $this->adapter->page();
+        return $this->getController()->getServiceLocator();
     }
 }
