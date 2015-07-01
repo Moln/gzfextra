@@ -6,7 +6,6 @@ namespace Gzfextra\UiFramework;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ConfigInterface;
 use Zend\ServiceManager\Exception;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Zend\Stdlib\InitializableInterface;
 

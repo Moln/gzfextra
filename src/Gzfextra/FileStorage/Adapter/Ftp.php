@@ -2,7 +2,6 @@
 namespace Gzfextra\FileStorage\Adapter;
 
 use Gzfextra\FileStorage\Client\Ftp as FtpClient;
-use Gzfextra\FileStorage\Filter\RenameUpload;
 
 /**
  * Class Ftp
