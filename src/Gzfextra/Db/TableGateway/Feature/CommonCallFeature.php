@@ -79,7 +79,7 @@ class CommonCallFeature extends AbstractFeature
             }
 
             if (count($select->getRawState(Select::GROUP))) {
-                $adapter = new DbSelect($select, $this->getAdapter());
+                $adapter = new DbSelect($select, $this->getAdapter(), $this->getResultSetPrototype());
             } else {
                 $count   = null;
                 $adapter = new Callback(
@@ -90,7 +90,7 @@ class CommonCallFeature extends AbstractFeature
                         $statement = $this->sql->prepareStatementForSqlObject($select);
                         $result    = $statement->execute();
 
-                        $resultSet = new ResultSet();
+                        $resultSet = $this->getResultSetPrototype() ? clone $this->getResultSetPrototype() : new ResultSet();
                         $resultSet->initialize($result);
                         return $resultSet;
                     }, function () use ($select, &$count) {

@@ -34,9 +34,8 @@ class Kendo implements UiAdapterInterface, InitializableInterface
      */
     public function init()
     {
-        $request = $this->getRequest();
-        $this->filter  = $request->getPost('filter');
-        $this->sort    = $request->getPost('sort');
+        $this->filter = isset($_REQUEST['filter']) ? $_REQUEST['filter'] : [];
+        $this->sort   = isset($_REQUEST['sort']) ? $_REQUEST['sort'] : [];
     }
 
     /**
