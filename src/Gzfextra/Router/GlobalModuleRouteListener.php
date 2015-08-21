@@ -81,8 +81,8 @@ class GlobalModuleRouteListener implements ListenerAggregateInterface
             /** @var \Zend\Mvc\Controller\ControllerManager $controllerLoader */
             $controllerLoader = $e->getApplication()->getServiceManager()->get('ControllerLoader');
 
-            $ctrlClass = ucfirst($module) . '\\Controller\\';
-            $ctrlClass .= str_replace(' ', '', ucwords(str_replace('-', ' ', $controller)));
+            $ctrlClass = $this->convertName($module) . '\\Controller\\';
+            $ctrlClass .= $this->convertName($controller);
             $controller = $ctrlClass;
             $matches->setParam('controller', $controller);
 
@@ -93,5 +93,10 @@ class GlobalModuleRouteListener implements ListenerAggregateInterface
                 $e->setControllerClass($ctrlClass);
             }
         }
+    }
+
+    private static function convertName($name)
+    {
+        return str_replace(' ', '', ucwords(str_replace('-', ' ', $name)));
     }
 }
