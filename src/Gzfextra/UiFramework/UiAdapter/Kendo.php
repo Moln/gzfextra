@@ -3,7 +3,6 @@ namespace Gzfextra\UiFramework\UiAdapter;
 
 use Gzfextra\Stdlib\OptionsTrait;
 use Zend\Db\Sql\Predicate\Predicate;
-use Zend\Db\Sql\Where;
 use Zend\Http\Request;
 use Zend\Stdlib\InitializableInterface;
 use Zend\View\Model\JsonModel;
@@ -96,7 +95,7 @@ class Kendo implements UiAdapterInterface, InitializableInterface
     /**
      * @param array $fieldMap
      *
-     * @return Where
+     * @return Predicate
      */
     public function filter($fieldMap = array())
     {
@@ -104,7 +103,7 @@ class Kendo implements UiAdapterInterface, InitializableInterface
             return array();
         }
 
-        $where = new Where();
+        $where = new Predicate();
         $where->addPredicate($this->parseFilters($this->filter, $fieldMap));
 
         return $where;
